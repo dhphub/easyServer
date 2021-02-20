@@ -11,7 +11,7 @@
 namespace es {
 namespace CurrentThread {
 
-__thread pid_t cachePid = 0;
+extern __thread int cachePid;
 
 void cache();
 

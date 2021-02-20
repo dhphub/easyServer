@@ -11,7 +11,7 @@
 #include <functional>
 #include <string>
 #include <assert.h>
-#include "noncopyable.h"
+#include "base/noncopyable.h"
 
 namespace es {
 

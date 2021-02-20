@@ -2,9 +2,12 @@ set(BASE_SRC noncopyable.h
         thread.h
         thread.cpp
         CurrentThread.h
-        ../net/Channel.h
-        ../net/EventLoop.h
-        ../net/Poller.h)
+        Timestamp.cpp
+        Timestamp.h
+        Timer.cpp
+        Timer.h TimerId.h TimerQueue.cpp TimerQueue.h CallBack.h)
 
-add_library(base ${BASE_SRC})
-target_link_libraries(base pthread)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+
+add_library(es_base ${BASE_SRC})
+target_link_libraries(es_base pthread)

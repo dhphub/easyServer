@@ -43,10 +43,15 @@ using ThreadFunc = es::Thread::ThreadFunc;
     return nullptr;
   }
   
-  void CurrentThread::cache() {
-    cachePid = detail::gettid();
+}
+
+namespace CurrentThread {
+  __thread int cachePid = 0;
+  void cache() {
+    if (cachePid == 0) {
+      cachePid = detail::gettid();
+    }
   }
-  
 }
 
 Thread::Thread(const ThreadFunc func, const std::string& name) :
