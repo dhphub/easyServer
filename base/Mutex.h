@@ -1,5 +1,5 @@
 //
-// Created by 董海鹏 on 2021/2/21.
+// Created by onirii on 2021/2/21.
 //
 
 #ifndef EASYSERVER_MUTEX_H
@@ -36,9 +36,32 @@ public:
   pid_t pid() const {
     return pid_;
   }
+  
+  pthread_mutex_t *getPthreadMutex() {
+    return &mutex_;
+  }
 
+  //配合条件变量使用
+  //cond_wait的时候锁会释放
+  //wait返回的时候重新加锁
+  //用这个类来维护pid_这个信息的正确性
+  class UnassignGuard {
+  public:
+    explicit UnassignGuard(MutexLock& mutex) : mutex_(mutex) {
+      mutex_.unassignOwner();
+    }
+    ~UnassignGuard() {
+      mutex_.assignOwner();
+    }
+  private:
+    MutexLock& mutex_;
+  };
+  
 private:
+  void assignOwner();
+  void unassignOwner();
   pthread_mutex_t mutex_;
+  //持有者的global pid,析构时要求没有线程持有锁
   pid_t pid_;
 };
 

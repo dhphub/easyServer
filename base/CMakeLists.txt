@@ -11,7 +11,9 @@ set(BASE_SRC noncopyable.h
         TimerQueue.h
         CallBack.h
         Mutex.cpp
-        Mutex.h)
+        Mutex.h
+        Condition.cpp
+        Condition.h)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 

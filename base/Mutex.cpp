@@ -1,5 +1,5 @@
 //
-// Created by ∂≠∫£≈Ù on 2021/2/21.
+// Created by onirii on 2021/2/21.
 //
 
 #include "Mutex.h"
@@ -18,12 +18,22 @@ MutexLock::~MutexLock() {
 
 void MutexLock::lock() {
   CHECKZERO(pthread_mutex_lock(&mutex_))
-  pid_ = CurrentThread::pid();
+  assignOwner();
+  //pid_ = CurrentThread::pid();
 }
 
 void MutexLock::unlock() {
-  pid_ = 0;
+  //pid_ = 0;
+  unassignOwner();
   CHECKZERO(pthread_mutex_unlock(&mutex_))
+}
+
+void MutexLock::unassignOwner() {
+  pid_ = 0;
+}
+
+void MutexLock::assignOwner() {
+  pid_ = CurrentThread::pid();
 }
 
 MutexLockGuard::~MutexLockGuard() {
