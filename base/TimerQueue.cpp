@@ -64,8 +64,7 @@ void TimerQueue::cancelTimer() {
 
 }
 
-TimerId TimerQueue::addTimer(const TimerCallBack &cb, Timestamp when, double interval) {
-  Timer *timer = new Timer(cb, when, interval);
+void TimerQueue::addTimerInLoop(Timer *timer) {
   //TODO: why?
   loop_->assertInLoopThread();
   bool earliestChanged = insert(timer);
@@ -75,7 +74,6 @@ TimerId TimerQueue::addTimer(const TimerCallBack &cb, Timestamp when, double int
   if (earliestChanged) {
     detail::resetTimerfd(timerfd_, timer->expiration());
   }
-  return TimerId(timer);
 }
 
 bool TimerQueue::insert(Timer *timer) {
@@ -141,6 +139,12 @@ void TimerQueue::reset(const std::vector<Entry> expired, Timestamp now) {
   if (nextExpire.valid()) {
     detail::resetTimerfd(timerfd_, nextExpire);
   }
+}
+
+TimerId TimerQueue::addTimer(const TimerCallBack& cb, Timestamp when, double interval) {
+  Timer *timer = new Timer(cb, when, interval);
+  loop_->runInLoop(std::bind(&TimerQueue::addTimerInLoop, this, timer));
+  return TimerId(timer);
 }
 
 }

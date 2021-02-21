@@ -5,7 +5,13 @@ set(BASE_SRC noncopyable.h
         Timestamp.cpp
         Timestamp.h
         Timer.cpp
-        Timer.h TimerId.h TimerQueue.cpp TimerQueue.h CallBack.h)
+        Timer.h
+        TimerId.h
+        TimerQueue.cpp
+        TimerQueue.h
+        CallBack.h
+        Mutex.cpp
+        Mutex.h)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 

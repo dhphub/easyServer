@@ -27,6 +27,10 @@ private:
   typedef std::pair<Timestamp, Timer*> Entry;
   typedef std::set<Entry> TimerList;
   
+  //addTimer会调用这里 目的是为了加强线程安全性
+  //这里调用EventLoop::runInLoop来保证只在loop线程调用
+  void addTimerInLoop(Timer* timer);
+  
   //timer到期,对应fd可读
   void handleRead();
   
