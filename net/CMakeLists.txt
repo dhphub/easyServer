@@ -1,7 +1,7 @@
 set(NET_SRC
         Channel.cpp
         EventLoop.cpp
-        Poller.cpp)
+        Poller.cpp EventLoopThread.cpp EventLoopThread.h)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 

@@ -23,6 +23,7 @@ public:
   void join();
   pthread_t tid() const;  // 进程内唯一的thread id
   pid_t pid() const;      // 系统内唯一的pid
+  bool started() const { return started_; }
 private:
   std::string name_;
   pthread_t tid_;
