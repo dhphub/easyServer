@@ -27,5 +27,8 @@ target_link_libraries(test5 es_net es_base)
 add_executable(test6 test6.cpp)
 target_link_libraries(test6 es_net es_base)
 
+add_executable(test7 test7.cpp)
+target_link_libraries(test7 es_net es_base)
+
 add_executable(test_eventfd test_eventfd.cpp)
 target_link_libraries(test_eventfd es_base)

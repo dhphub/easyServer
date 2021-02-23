@@ -13,7 +13,8 @@ set(BASE_SRC noncopyable.h
         Mutex.cpp
         Mutex.h
         Condition.cpp
-        Condition.h)
+        Condition.h
+        copyable.h)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
