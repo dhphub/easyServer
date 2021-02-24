@@ -11,7 +11,11 @@ set(NET_SRC
         Socket.cpp
         Socket.h
         Acceptor.cpp
-        Acceptor.h)
+        Acceptor.h
+        TcpConnection.cpp
+        TcpConnection.h
+        TcpServer.cpp
+        TcpServer.h)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 

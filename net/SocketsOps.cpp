@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <strings.h>
 
 namespace es {
 
@@ -106,6 +107,17 @@ void fromHostPort(const char* ip, uint16_t port, struct sockaddr_in* addr) {
     //TODO log
     abort();
   }
+}
+
+struct sockaddr_in getLocalAddr(int sockfd) {
+  struct sockaddr_in localAddr;
+  bzero(&localAddr, sizeof(localAddr));
+  socklen_t addrLen = sizeof(localAddr);
+  if (::getsockname(sockfd, sockaddr_cast(&localAddr), &addrLen) < 0) {
+    //TODO log
+    abort();
+  }
+  return localAddr;
 }
 
 }
